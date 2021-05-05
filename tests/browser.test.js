@@ -25,10 +25,27 @@ test('The stack should be empty in the beginning', async () => {
 
 describe('Clicking "Pusha till stacken"', () => {
 	it('should open a prompt box', async () => {
-		let push = await driver.findElement(By.id('push'));
-		await push.click();
-		let alert = await driver.switchTo().alert();
+    await driver.findElement(By.id('push')).click();
+    let alert = await driver.switchTo().alert();
 		await alert.sendKeys("Bananer");
 		await alert.accept();
 	});
+});
+
+test('Clicking "vad finns överst på stacken" with two elements in stack, the top element should be displayed', async () => {
+  await driver.findElement(By.id('push')).click();
+  let alert = await driver.switchTo().alert();
+  await alert.sendKeys("Halloj");
+  await alert.accept();
+  await driver.findElement(By.id('peek')).click();
+  let topEl = await driver.findElement(By.id('top_of_stack')).getText()
+  await expect(topEl).toEqual("Bananer");
+});
+
+test('Clicking "vad finns överst på stacken" after an element has been poped, the top element should be displayed', async () => {
+  await driver.findElement(By.id('pop')).click();
+  await driver.switchTo().alert().accept();
+  await driver.findElement(By.id('peek')).click();
+  let topEl = await driver.findElement(By.id('top_of_stack')).getText()
+  await expect(topEl).toEqual("Halloj");
 });
