@@ -39,7 +39,7 @@ test('Clicking "vad finns överst på stacken" with two elements in stack, the t
   await alert.accept();
   await driver.findElement(By.id('peek')).click();
   let topEl = await driver.findElement(By.id('top_of_stack')).getText()
-  await expect(topEl).toEqual("Bananer");
+  await expect(topEl).toEqual("Halloj");
 });
 
 test('Clicking "vad finns överst på stacken" after an element has been poped, the top element should be displayed', async () => {
@@ -47,5 +47,5 @@ test('Clicking "vad finns överst på stacken" after an element has been poped, 
   await driver.switchTo().alert().accept();
   await driver.findElement(By.id('peek')).click();
   let topEl = await driver.findElement(By.id('top_of_stack')).getText()
-  await expect(topEl).toEqual("Halloj");
+  await expect(topEl).toEqual("Bananer");
 });
